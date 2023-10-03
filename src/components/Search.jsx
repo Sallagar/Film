@@ -1,7 +1,18 @@
 import { useState } from "react"
 
 const Search = (props) => {
+    const {
+        searchMovies = Function.prototype
+    } = props
+
     const [search, setSearch] = useState ('')
+    // const [type, setType] = useState('all')
+
+    const handleKey = (event) => {
+        if (event.key === 'Enter') {
+            searchMovies(search)
+        }
+    }
 
     return <div className="row">
         <div className="input-field">
@@ -11,14 +22,19 @@ const Search = (props) => {
                 type="search" 
                 onChange={(e) => setSearch(e.target.value)}
                 value={search}           
+                onKeyDown={handleKey}
             />
-            <button className="btn search-btn">Search</button>
+            <button className="btn search-btn"
+                onClick={() => searchMovies(search)}
+            > 
+                Search
+            </button>
         </div>
-        <div>
+        {/* <div>
             <label>
                 <input 
                     className="with-gap" 
-                    name="group3" 
+                    name="type" 
                     type="radio" 
                     checked 
                 />
@@ -42,7 +58,7 @@ const Search = (props) => {
                 />
                 <span>Only Serials</span>
             </label>
-        </div>
+        </div> */}
   </div>
 }
 

@@ -7,12 +7,25 @@ const Main = () => {
     const [movies, setMovies] = useState([])
     const [loading, setLoading] = useState (true)
 
+    const searchMovies = (str) => {
+        fetch(`https://www.omdbapi.com/?apikey=6e22be8b&s=${str}`)
+            .then(response => response.json())
+            .then ((data) => 
+                setMovies(data.Search),
+                setLoading(false)
+            )
+            .catch((err) => {
+                console.error(err)
+                setLoading(false)
+            })
+    }
+
     useEffect (() => {
         fetch('https://www.omdbapi.com/?apikey=6e22be8b&s=all')
             .then(response => response.json())
             .then ((data) => 
-                setMovies (data.Search),
-                setLoading (false)
+                setMovies(data.Search),
+                setLoading(false)
             )
             .catch((err) => {
                 console.error(err)
@@ -20,7 +33,7 @@ const Main = () => {
             })
     }, [])
     return <main className="continer contant">
-        <Search />
+        <Search searchMovies={searchMovies} />
         {loading ? <Preloader/> : <Movies movies={movies}/>}
     </main>
 }
