@@ -1,9 +1,9 @@
 const Footer = () => {
     return(
-        <footer class="page-footer">
-            <div class="container">
+        <footer className="page-footer">
+            <div className="container">
             © {new Date().getFullYear()} Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
             </div>
         </footer>
     )
