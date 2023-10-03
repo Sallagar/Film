@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { Movies } from "../components/Movies"
 import { Preloader } from "../components/Preloader"
+import { Search } from "../components/Search"
 
 const Main = () => {
     const [movies, setMovies] = useState([])
@@ -19,6 +20,7 @@ const Main = () => {
             })
     }, [])
     return <main className="continer contant">
+        <Search />
         {loading ? <Preloader/> : <Movies movies={movies}/>}
     </main>
 }
