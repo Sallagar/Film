@@ -7,9 +7,12 @@ const Main = () => {
     const [movies, setMovies] = useState([])
     const [loading, setLoading] = useState (true)
 
-    const searchMovies = (str) => {
-        fetch(`https://www.omdbapi.com/?apikey=6e22be8b&s=${str}`)
-            .then(response => response.json())
+    const searchMovies = (str, type='all') => {
+        setLoading(true)
+        fetch(
+            `https://www.omdbapi.com/?apikey=6e22be8b&s=${str}${type !== 'all' ? `&type=${type}`: ''}`
+        )
+            .then((response) => response.json())
             .then ((data) => 
                 setMovies(data.Search),
                 setLoading(false)
@@ -21,7 +24,7 @@ const Main = () => {
     }
 
     useEffect (() => {
-        fetch('https://www.omdbapi.com/?apikey=6e22be8b&s=all')
+        fetch('https://www.omdbapi.com/?apikey=6e22be8b&s=avengers')
             .then(response => response.json())
             .then ((data) => 
                 setMovies(data.Search),

@@ -6,12 +6,17 @@ const Search = (props) => {
     } = props
 
     const [search, setSearch] = useState ('')
-    // const [type, setType] = useState('all')
+    const [type, setType] = useState('all')
 
     const handleKey = (event) => {
         if (event.key === 'Enter') {
-            searchMovies(search)
+            searchMovies(search, type)
         }
+    }
+
+    const handleFilter = (event) => {
+        setType(event.target.dataset.type)
+        searchMovies(search, event.target.dataset.type)
     }
 
     return <div className="row">
@@ -25,40 +30,48 @@ const Search = (props) => {
                 onKeyDown={handleKey}
             />
             <button className="btn search-btn"
-                onClick={() => searchMovies(search)}
+                onClick={() => 
+                    searchMovies(search, type)
+                }
             > 
                 Search
             </button>
         </div>
-        {/* <div>
+        <div>
             <label>
                 <input 
                     className="with-gap" 
                     name="type" 
                     type="radio" 
-                    checked 
+                    data-type="all"
+                    onChange={handleFilter}
+                    checked={type === 'all'}
                 />
                 <span>All</span>
             </label>
             <label>
                 <input 
                     className="with-gap" 
-                    name="group3" 
+                    name="type" 
                     type="radio" 
-                    checked 
+                    data-type="movie"
+                    onChange={handleFilter}
+                    checked={type === 'movie'} 
                 />
-                <span>Only movies</span>
+                <span>Movies only</span>
             </label>
             <label>
                 <input 
                     className="with-gap" 
-                    name="group3" 
+                    name="type" 
                     type="radio" 
-                    checked 
+                    data-type="series"
+                    onChange={handleFilter}
+                    checked={type === 'series'} 
                 />
-                <span>Only Serials</span>
+                <span>Serials only </span>
             </label>
-        </div> */}
+        </div>
   </div>
 }
 
